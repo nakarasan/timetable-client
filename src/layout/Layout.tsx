@@ -1,13 +1,17 @@
 import * as React from 'react';
 import { Outlet } from 'react-router-dom';
-import { Header } from 'components/base';
+import { Header } from 'components/Header';
+import Sidebar from 'components/Sidebar';
 
 export default function Layout() {
   return (
     <div className='min-h-full flex flex-col'>
-      <Header />
-      <main className='flex  flex-row'>
-        <div className='w-full bg-white'>
+      <div className=''>
+        <Header />
+      </div>
+      <main className='flex  flex-row '>
+        <Sidebar />
+        <div className='w-full bg-white pt-20 px-4'>
           <Outlet />
         </div>
       </main>

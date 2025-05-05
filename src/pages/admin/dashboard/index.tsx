@@ -1,11 +1,11 @@
 import React from 'react';
-import AdminHeader from 'components/shared/admin/header_Navbar';
 
 export const AdminDash = () => {
   return (
-    <div>
-      <AdminHeader />
-      <div></div>
+    <div className='rounded-lg p-6 border transition-colors duration-500 bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700'>
+      <p className='text-gray-700 dark:text-gray-300'>
+        Content for dashboard section will appear here.
+      </p>
     </div>
   );
 };

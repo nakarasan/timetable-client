@@ -1,17 +1,15 @@
 import React from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { Layout } from 'layout';
-import * as routes from 'constants/routes';
-import StudentDashboard from 'pages/Student';
-import StaffDashboard from 'pages/Staff';
 import Signup from 'pages/Siginup';
 import Login from 'pages/login';
 import Forgot_password from 'pages/forgot_password/forgot_password';
 import Resetpassword from 'pages/reset-password';
-import Dashboard from 'pages/dashboard';
 import { AdminDash } from 'pages/admin/dashboard';
 import { RootState } from 'store';
 import { useSelector } from 'react-redux';
+import { Staffs } from 'pages/Staffs';
+import { Students } from 'pages/Students';
 
 const Router = () => {
   const { auth } = useSelector((state: RootState) => state.auth);
@@ -21,7 +19,7 @@ const Router = () => {
     if (auth?.type != 'admin') {
       return (
         <Navigate
-          to={routes.LOGIN}
+          to='/login'
           replace
         />
       );
@@ -34,7 +32,7 @@ const Router = () => {
     if (auth?.type != 'admin') {
       return (
         <Navigate
-          to={routes.LOGIN}
+          to='/login'
           replace
         />
       );
@@ -47,7 +45,7 @@ const Router = () => {
     if (auth?.type != 'admin') {
       return (
         <Navigate
-          to={routes.LOGIN}
+          to='/login'
           replace
         />
       );
@@ -66,30 +64,38 @@ const Router = () => {
           }
         ></Route> */}
         <Route
-          path={routes.HOME}
+          path='/'
           element={<Layout />}
         >
           <Route
             index
             element={<AdminDash />}
           />
+          <Route
+            path='/staffs'
+            element={<Staffs />}
+          />
+          <Route
+            path='/students'
+            element={<Students />}
+          />
+          <Route
+            path='/login'
+            element={<Login />}
+          />
+          <Route
+            path='/signup'
+            element={<Signup />}
+          />
+          <Route
+            path='/fogot-password'
+            element={<Forgot_password />}
+          />
+          <Route
+            path='/reset-password'
+            element={<Resetpassword />}
+          />
         </Route>
-        <Route
-          path={routes.LOGIN}
-          element={<Login />}
-        />
-        <Route
-          path={routes.SIGNUP}
-          element={<Signup />}
-        />
-        <Route
-          path={routes.FORGOT_PASSWORD}
-          element={<Forgot_password />}
-        />
-        <Route
-          path={routes.RESET_PASSWORD}
-          element={<Resetpassword />}
-        />
       </Routes>
     </BrowserRouter>
   );

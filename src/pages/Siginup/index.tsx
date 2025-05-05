@@ -2,7 +2,6 @@ import React from "react";
 import signup from "assets/login2.gif";
 import Microsoft from "assets/microsoft.png";
 import Google from "assets/google.png";
-import * as routes from "constants/routes";
 const Signup = () => {
   return (
     <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
@@ -91,7 +90,7 @@ const Signup = () => {
             <p className="text-sm text-gray-600">
               Already have an account?{" "}
               <a
-                href={routes.LOGIN}
+                href='/login'
                 className="font-medium text-blue-600 hover:text-blue-500 hover:underline">
                 Sign in
               </a>
