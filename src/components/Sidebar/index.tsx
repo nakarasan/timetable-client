@@ -25,7 +25,7 @@ import { useNavigate } from 'react-router-dom';
 const Sidebar = () => {
   const [activeItem, setActiveItem] = useState('Dashboard');
   const menuItems: any = [
-    { name: 'Dashboard', icon: HomeIcon, path: '/dashboard' },
+    { name: 'Dashboard', icon: HomeIcon, path: '/' },
     { name: 'Timetable', icon: ClockIcon, path: '/timetable' },
     { name: 'Staffs', icon: UsersIcon, path: '/staffs' },
     { name: 'Students', icon: AcademicCapIcon, path: '/students' },

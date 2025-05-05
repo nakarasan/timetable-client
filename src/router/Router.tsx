@@ -1,15 +1,17 @@
 import React from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { Layout } from 'layout';
-import Signup from 'pages/Siginup';
+import Signup from 'pages/SignUp';
 import Login from 'pages/login';
 import Forgot_password from 'pages/forgot_password/forgot_password';
 import Resetpassword from 'pages/reset-password';
-import { AdminDash } from 'pages/admin/dashboard';
 import { RootState } from 'store';
 import { useSelector } from 'react-redux';
 import { Staffs } from 'pages/Staffs';
 import { Students } from 'pages/Students';
+import { Classes } from 'pages/Classes';
+import { AdminDashboard } from 'pages/AdminDashboard';
+import { AddTimetable } from 'pages/Timetable';
 
 const Router = () => {
   const { auth } = useSelector((state: RootState) => state.auth);
@@ -69,15 +71,23 @@ const Router = () => {
         >
           <Route
             index
-            element={<AdminDash />}
+            element={<AdminDashboard />}
           />
           <Route
             path='/staffs'
             element={<Staffs />}
           />
           <Route
+            path='/timetable'
+            element={<AddTimetable />}
+          />
+          <Route
             path='/students'
             element={<Students />}
+          />
+          <Route
+            path='/master-data/classes'
+            element={<Classes />}
           />
           <Route
             path='/login'

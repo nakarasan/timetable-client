@@ -11,7 +11,7 @@ export default function Layout() {
       </div>
       <main className='flex  flex-row '>
         <Sidebar />
-        <div className='w-full bg-white pt-20 px-4'>
+        <div className='w-full bg-gray-100 pt-20 px-4'>
           <Outlet />
         </div>
       </main>
