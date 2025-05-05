@@ -69,7 +69,7 @@ const AdminLayout: React.FC = () => {
     if (activeItem === "Employees") {
       return <AddStaff />;
     } else if (activeItem === "Students") {
-      return <AddStudent />;
+      return <AddStaff />;
     }else if (activeItem === "Timetable") {
       return <AddTimetable />;
     }  
