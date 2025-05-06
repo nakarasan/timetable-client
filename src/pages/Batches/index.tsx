@@ -1,4 +1,6 @@
-import React from 'react';
+import { Modal } from 'components/Model';
+import React, { useState } from 'react';
+import { BatchForm } from './form';
 
 export const Batches = () => {
   const staffMembers: any = [
@@ -23,14 +25,17 @@ export const Batches = () => {
       address: '456 Oak Avenue',
     },
   ];
+
+  const [createOpen, setCreateOpen] = useState(false);
+
   return (
     <div>
       <div className='flex justify-end pb-4'>
         <button
-          // onClick={() => setShowAddForm(true)}
+          onClick={() => setCreateOpen(true)}
           className='bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-6 py-2 rounded-lg shadow transition'
         >
-          Add New Class
+          Add Batch
         </button>
       </div>
       <div className='bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden'>
@@ -76,6 +81,12 @@ export const Batches = () => {
           </table>
         </div>
       </div>
+      <Modal
+        isOpen={createOpen}
+        setIsOpen={setCreateOpen}
+        title='Add New Batch'
+        children={<BatchForm />}
+      />
     </div>
   );
 };
