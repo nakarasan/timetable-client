@@ -37,7 +37,6 @@ export const SubjectForm = () => {
   //   }
   // };
 
-  console.log('formData', formData);
 
   return (
     <div className='bg-white p-8 rounded-xl shadow-md md:min-w-[40vw]'>
@@ -98,7 +97,7 @@ export const SubjectForm = () => {
             type='submit'
             className='bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-6 py-2 rounded-lg shadow transition'
           >
-            Add Staff
+            Add
           </button>
         </div>
       </form>
