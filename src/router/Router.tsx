@@ -9,9 +9,11 @@ import { RootState } from 'store';
 import { useSelector } from 'react-redux';
 import { Staffs } from 'pages/Staffs';
 import { Students } from 'pages/Students';
-import { Classes } from 'pages/Classes';
+import { Departments } from 'pages/Departments';
 import { AdminDashboard } from 'pages/AdminDashboard';
 import { AddTimetable } from 'pages/Timetable';
+import { Batches } from 'pages/Batches';
+import { Subjects } from 'pages/Subjects';
 
 const Router = () => {
   const { auth } = useSelector((state: RootState) => state.auth);
@@ -86,8 +88,16 @@ const Router = () => {
             element={<Students />}
           />
           <Route
-            path='/master-data/classes'
-            element={<Classes />}
+            path='/master-data/departments'
+            element={<Departments />}
+          />
+          <Route
+            path='/master-data/batches'
+            element={<Batches />}
+          />
+          <Route
+            path='/master-data/subjects'
+            element={<Subjects />}
           />
           <Route
             path='/login'

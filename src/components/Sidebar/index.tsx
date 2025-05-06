@@ -36,14 +36,14 @@ const Sidebar = () => {
         {
           name: 'Classes',
           icon: AcademicCapIcon,
-          path: '/master-data/classes',
-        },
-        {
-          name: 'Branches',
-          icon: BuildingLibraryIcon,
-          path: '/master-data/branches',
+          path: '/master-data/departments',
         },
         { name: 'Batches', icon: UsersIcon, path: '/master-data/batches' },
+        {
+          name: 'Subjects',
+          icon: BuildingLibraryIcon,
+          path: '/master-data/subjects',
+        },
       ],
     },
     { name: 'Message', icon: BellIcon, path: '/message' },

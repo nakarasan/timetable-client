@@ -1,18 +1,6 @@
 import React from 'react';
 
-// Define a type for StaffMember
-type StaffMember = {
-  id: number;
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone: string;
-  role: string;
-  department: string;
-  address: string;
-};
-
-export const Classes = () => {
+export const Departments = () => {
   const staffMembers: any = [
     {
       id: 1,
