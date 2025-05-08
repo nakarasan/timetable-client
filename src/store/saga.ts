@@ -3,7 +3,14 @@ import { authSaga } from 'store/auth/sagas';
 import { customersSaga } from './customers/sagas';
 import { branchesSaga } from './branch/sagas';
 import { subjectSaga } from './subject/sagas';
+import { classSaga } from './department/sagas';
 
 export function* rootSaga() {
-  yield all([authSaga(), customersSaga(), branchesSaga(), subjectSaga()]);
+  yield all([
+    authSaga(),
+    customersSaga(),
+    branchesSaga(),
+    subjectSaga(),
+    classSaga(),
+  ]);
 }

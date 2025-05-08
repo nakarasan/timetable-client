@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { storeClassRequested } from 'store/department/classSlice';
 
 export const DepartmentForm = () => {
   const [formData, setFormData] = useState({
@@ -13,13 +15,16 @@ export const DepartmentForm = () => {
     }));
   };
 
-
+  const dispatch = useDispatch();
   console.log('formData', formData);
 
   return (
     <div className='bg-white p-8 rounded-xl shadow-md md:min-w-[40vw]'>
       <form
-        // onSubmit={handleSubmit}
+        onSubmit={(e) => {
+          e.preventDefault();
+          dispatch(storeClassRequested(formData));
+        }}
         className='space-y-6'
       >
         <div>
@@ -37,12 +42,6 @@ export const DepartmentForm = () => {
         </div>
 
         <div className='flex justify-end space-x-4 pt-4'>
-          <button
-            type='button'
-            className='bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold px-6 py-2 rounded-lg shadow transition'
-          >
-            Cancel
-          </button>
           <button
             type='submit'
             className='bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-6 py-2 rounded-lg shadow transition'

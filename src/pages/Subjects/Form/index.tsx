@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { storeSubjectEffect } from 'store/subject/sagas';
 import { storeSubjectRequested } from 'store/subject/subjectSlice';
 
 export const SubjectForm = () => {
@@ -17,29 +16,7 @@ export const SubjectForm = () => {
       [name]: value,
     }));
   };
-
-  // const handleSubmit = async (e: React.FormEvent) => {
-  //   e.preventDefault();
-  //   try {
-  //     const response = await fetch('/api/subjects', {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //       body: JSON.stringify(formData),
-  //     });
-
-  //     if (response.ok) {
-  //       console.log('Subject added successfully!');
-  //       // Optionally reset form or show success message
-  //     } else {
-  //       console.error('Failed to add subject');
-  //     }
-  //   } catch (error) {
-  //     console.error('Error:', error);
-  //   }
-  // };
-
+  
   const dispatch = useDispatch();
 
   return (

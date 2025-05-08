@@ -1,32 +1,31 @@
 import { Modal } from 'components/Model';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { DepartmentForm } from './form';
+import { RootState } from 'store';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { deleteClassRequested, loadClassRequested } from 'store/department/classSlice';
+import { Trash2 } from 'lucide-react';
 
 export const Departments = () => {
-  const staffMembers: any = [
-    {
-      id: 1,
-      firstName: 'Achchuthan',
-      lastName: 'Achchu',
-      email: 'achchuthan@example.com',
-      phone: '+1 234 567 890',
-      role: 'Lecturer',
-      department: 'Computer Science',
-      address: '123 Main Street',
-    },
-    {
-      id: 2,
-      firstName: 'John',
-      lastName: 'Doe',
-      email: 'john.doe@example.com',
-      phone: '+1 234 567 891',
-      role: 'Admin Staff',
-      department: 'Information Technology',
-      address: '456 Oak Avenue',
-    },
-  ];
 
   const [createOpen, setCreateOpen] = useState(false);
+
+  const { storeClass, classes } = useSelector(
+    (state: RootState) => state.class
+  );
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const fetchSubjects = async () => {
+      setCreateOpen(false);
+      await dispatch(loadClassRequested({}));
+    };
+
+    fetchSubjects();
+  }, [storeClass]);
+
+  console.log('classes', classes);
 
   return (
     <div>
@@ -43,7 +42,7 @@ export const Departments = () => {
           <table className='min-w-full divide-y divide-gray-200'>
             <thead className='bg-gray-50'>
               <tr>
-                {['Name', 'Email', 'Phone', 'Role', 'Department'].map(
+                {['Name','Actions'].map(
                   (heading) => (
                     <th
                       key={heading}
@@ -56,27 +55,40 @@ export const Departments = () => {
               </tr>
             </thead>
             <tbody className='bg-white divide-y divide-gray-200'>
-              {staffMembers?.map((staff: any) => (
-                <tr key={staff.id}>
-                  <td className='px-6 py-4 whitespace-nowrap'>
-                    <div className='text-sm font-medium text-gray-900'>
-                      {staff.firstName} {staff.lastName}
-                    </div>
-                  </td>
-                  <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
-                    {staff.email}
-                  </td>
-                  <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
-                    {staff.phone}
-                  </td>
-                  <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
-                    {staff.role}
-                  </td>
-                  <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
-                    {staff.department}
+              {classes && classes.length > 0 ? (
+                classes.map((subject: any, index: any) => (
+                  <tr key={index}>
+                    <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500 w-[70vw]'>
+                      {subject?.name}
+                    </td>
+                    {/* <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
+                      {subject?.hoursInDay}
+                    </td>
+                    <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
+                      {subject?.hoursInWeek}
+                    </td> */}
+                    <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
+                      <Trash2
+                        className='text-red-700 cursor-pointer h-5 w-5'
+                        onClick={async () => {
+                          await dispatch(
+                            deleteClassRequested(subject?.id)
+                          );
+                        }}
+                      />
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td
+                    colSpan={4}
+                    className='text-center px-6 py-4 text-sm text-gray-500'
+                  >
+                    No data available.
                   </td>
                 </tr>
-              ))}
+              )}
             </tbody>
           </table>
         </div>
