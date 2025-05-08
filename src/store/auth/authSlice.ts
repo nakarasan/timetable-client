@@ -9,12 +9,12 @@ const initialState: any = {
 };
 
 const authSlice = createSlice({
-  name: "auth",
+  name: 'auth',
   initialState,
   reducers: {
     loginRequested(
       state,
-      action: PayloadAction<{ username: string; password: string }>
+      action: PayloadAction<any>
     ) {
       state.loading = true;
       state.error = null;
@@ -25,22 +25,21 @@ const authSlice = createSlice({
       state.auth = action.payload;
     },
 
-    loginFailure(state, action: PayloadAction<string>) {
+    loginFailure(state, action: PayloadAction<any>) {
       state.loading = false;
       state.error = action.payload;
     },
 
-    loadUserPermissionRequested(state, action: PayloadAction<{ id: number }>) {
+    registerRequested(state, action: PayloadAction<any>) {
       state.loading = true;
       state.error = null;
     },
-    loadUserPermissionSuccess(state, action: PayloadAction<any>) {
+    registerSuccess(state, action: PayloadAction<any>) {
       state.loading = false;
       state.error = null;
-      state.permission = action.payload.result;
+      state.auth = action.payload.result;
     },
-
-    loadUserPermissionFailure(state, action: PayloadAction<string>) {
+    registerFailure(state, action: PayloadAction<any>) {
       state.loading = false;
       state.error = action.payload;
     },
@@ -51,9 +50,9 @@ export const {
   loginRequested,
   loginSuccess,
   loginFailure,
-  loadUserPermissionFailure,
-  loadUserPermissionRequested,
-  loadUserPermissionSuccess,
+  registerRequested,
+  registerSuccess,
+  registerFailure,
 } = authSlice.actions;
 
 export default authSlice.reducer;

@@ -1,16 +1,16 @@
-import { takeLatest, put, call } from "redux-saga/effects";
+import { takeLatest, put, call } from 'redux-saga/effects';
 import { axiosInstance } from 'store/axios';
 import { apiURL } from 'constants/url';
-import toast from "react-hot-toast";
+import toast from 'react-hot-toast';
 
 import {
   loginRequested,
   loginSuccess,
   loginFailure,
-  loadUserPermissionFailure,
-  loadUserPermissionRequested,
-  loadUserPermissionSuccess,
-} from "./authSlice";
+  registerRequested,
+  registerSuccess,
+  registerFailure,
+} from './authSlice';
 
 function* loginEffect(action: {
   type: string;
@@ -19,24 +19,19 @@ function* loginEffect(action: {
   try {
     const { data } = yield call(
       axiosInstance.post,
-      `${apiURL}/login`,
+      `${apiURL}/Auth/login`,
       action.payload
     );
 
-    if (data?.status) {
+    if (data?.succeeded) {
       yield put(loginSuccess(data));
-      yield call(loadUserPermissionEffect, {
-        payload: { id: data?.user.id },
-        type: "",
-      });
-
-      toast.success("Login succeessfully");
-      window.location.href = "./";
+      toast.success('Login succeessfully');
+      // window.location.href = "./";
     } else {
       if (data?.errors) {
         toast.error(data?.errors[0]);
       } else {
-        toast.error("Login Failed");
+        toast.error('Login Failed');
       }
     }
   } catch (error: any) {
@@ -44,23 +39,24 @@ function* loginEffect(action: {
   }
 }
 
-export function* loadUserPermissionEffect(action: {
+export function* registerEffect(action: {
   type: string;
   payload: any;
 }): Generator<any, void, any> {
   try {
     const { data } = yield call(
-      axiosInstance.get,
-      `${apiURL}/get-role-permission-by-userid?Id=${action.payload.id}`
+      axiosInstance.post,
+      `${apiURL}/Auth/register`,
+      action.payload
     );
 
-    yield put(loadUserPermissionSuccess(data));
+    yield put(registerSuccess(data));
   } catch (error: any) {
-    yield put(loadUserPermissionFailure(error.message));
+    yield put(registerFailure(error.message));
   }
 }
 
 export function* authSaga(): Generator<any, void, any> {
   yield takeLatest(loginRequested, loginEffect);
-  yield takeLatest(loadUserPermissionRequested, loadUserPermissionEffect);
+  yield takeLatest(registerRequested, registerEffect);
 }

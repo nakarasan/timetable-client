@@ -55,8 +55,8 @@ export const Batches = () => {
               </tr>
             </thead>
             <tbody className='bg-white divide-y divide-gray-200'>
-              {batches && batches.length > 0 ? (
-                batches.map((item: any, index: any) => (
+              {batches && batches?.length > 0 ? (
+                batches?.map((item: any, index: any) => (
                   <tr key={index}>
                     <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
                       {item?.batchName}
