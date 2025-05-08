@@ -1,6 +1,14 @@
 import { Modal } from 'components/Model';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { SubjectForm } from './Form';
+import { useSelector } from 'react-redux';
+import { RootState } from 'store';
+import {
+  deleteSubjectRequested,
+  loadSubjectsRequested,
+} from 'store/subject/subjectSlice';
+import { useDispatch } from 'react-redux';
+import { Trash2 } from 'lucide-react';
 
 export const Subjects = () => {
   const staffMembers: any = [
@@ -26,6 +34,21 @@ export const Subjects = () => {
     },
   ];
   const [createOpen, setCreateOpen] = useState(false);
+  const { storeSubject, subjects } = useSelector(
+    (state: RootState) => state.subject
+  );
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const fetchSubjects = async () => {
+      setCreateOpen(false);
+      await dispatch(loadSubjectsRequested({}));
+    };
+
+    fetchSubjects();
+  }, [storeSubject]);
+
+  console.log('subjects', subjects);
 
   return (
     <div>
@@ -42,7 +65,7 @@ export const Subjects = () => {
           <table className='min-w-full divide-y divide-gray-200'>
             <thead className='bg-gray-50'>
               <tr>
-                {['Name', 'Email', 'Phone', 'Role', 'Department'].map(
+                {['Name', 'HoursInDay', 'HoursInWeek', 'Actions'].map(
                   (heading) => (
                     <th
                       key={heading}
@@ -55,27 +78,43 @@ export const Subjects = () => {
               </tr>
             </thead>
             <tbody className='bg-white divide-y divide-gray-200'>
-              {staffMembers?.map((staff: any) => (
-                <tr key={staff.id}>
-                  <td className='px-6 py-4 whitespace-nowrap'>
-                    <div className='text-sm font-medium text-gray-900'>
-                      {staff.firstName} {staff.lastName}
-                    </div>
-                  </td>
-                  <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
-                    {staff.email}
-                  </td>
-                  <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
-                    {staff.phone}
-                  </td>
-                  <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
-                    {staff.role}
-                  </td>
-                  <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
-                    {staff.department}
+              {subjects && subjects.length > 0 ? (
+                subjects.map((subject: any, index: any) => (
+                  <tr key={index}>
+                    <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
+                      {subject?.name}
+                    </td>
+                    <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
+                      {subject?.hoursInDay}
+                    </td>
+                    <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
+                      {subject?.hoursInWeek}
+                    </td>
+                    <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
+                      <Trash2
+                        className='text-red-700 cursor-pointer h-5 w-5'
+                        onClick={async () => {
+                          await dispatch(
+                            deleteSubjectRequested({
+                              subjectId: subject?.subjectId,
+                              subjectHourId: subject?.subjectHourId,
+                            })
+                          );
+                        }}
+                      />
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td
+                    colSpan={4}
+                    className='text-center px-6 py-4 text-sm text-gray-500'
+                  >
+                    No data available.
                   </td>
                 </tr>
-              ))}
+              )}
             </tbody>
           </table>
         </div>

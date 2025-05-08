@@ -34,7 +34,7 @@ const Sidebar = () => {
       icon: FolderIcon,
       children: [
         {
-          name: 'Classes',
+          name: 'Departments',
           icon: AcademicCapIcon,
           path: '/master-data/departments',
         },

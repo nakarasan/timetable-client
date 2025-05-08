@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { storeSubjectEffect } from 'store/subject/sagas';
+import { storeSubjectRequested } from 'store/subject/subjectSlice';
 
 export const SubjectForm = () => {
   const [formData, setFormData] = useState({
-    subject: '',
+    name: '',
     hoursInWeek: '',
     hoursInDay: '',
   });
@@ -37,11 +40,15 @@ export const SubjectForm = () => {
   //   }
   // };
 
+  const dispatch = useDispatch();
 
   return (
     <div className='bg-white p-8 rounded-xl shadow-md md:min-w-[40vw]'>
       <form
-        // onSubmit={handleSubmit}
+        onSubmit={(e) => {
+          e.preventDefault(); // Prevent page reload
+          dispatch(storeSubjectRequested(formData));
+        }}
         className='space-y-6'
       >
         <div>
@@ -50,8 +57,8 @@ export const SubjectForm = () => {
           </label>
           <input
             type='text'
-            name='subject'
-            value={formData.subject}
+            name='name'
+            value={formData.name}
             onChange={handleChange}
             className='w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:border-indigo-500'
             required
