@@ -1,32 +1,33 @@
 import { Modal } from 'components/Model';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BatchForm } from './form';
+import {
+  deleteBatchRequested,
+  loadBatchRequested,
+} from 'store/department/classSlice';
+import { useDispatch } from 'react-redux';
+import { RootState } from 'store';
+import { useSelector } from 'react-redux';
+import { Trash2 } from 'lucide-react';
 
 export const Batches = () => {
-  const staffMembers: any = [
-    {
-      id: 1,
-      firstName: 'Achchuthan',
-      lastName: 'Achchu',
-      email: 'achchuthan@example.com',
-      phone: '+1 234 567 890',
-      role: 'Lecturer',
-      department: 'Computer Science',
-      address: '123 Main Street',
-    },
-    {
-      id: 2,
-      firstName: 'John',
-      lastName: 'Doe',
-      email: 'john.doe@example.com',
-      phone: '+1 234 567 891',
-      role: 'Admin Staff',
-      department: 'Information Technology',
-      address: '456 Oak Avenue',
-    },
-  ];
 
   const [createOpen, setCreateOpen] = useState(false);
+  const dispatch = useDispatch();
+  const { storeBatch, batches } = useSelector(
+    (state: RootState) => state.class
+  );
+
+  useEffect(() => {
+    const fetchSubjects = async () => {
+      setCreateOpen(false);
+      await dispatch(loadBatchRequested({}));
+    };
+
+    fetchSubjects();
+  }, [storeBatch]);
+
+  console.log('batches', batches);
 
   return (
     <div>
@@ -43,40 +44,46 @@ export const Batches = () => {
           <table className='min-w-full divide-y divide-gray-200'>
             <thead className='bg-gray-50'>
               <tr>
-                {['Name', 'Email', 'Phone', 'Role', 'Department'].map(
-                  (heading) => (
-                    <th
-                      key={heading}
-                      className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
-                    >
-                      {heading}
-                    </th>
-                  )
-                )}
+                {['Batch', 'Class', 'Actions'].map((heading) => (
+                  <th
+                    key={heading}
+                    className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
+                  >
+                    {heading}
+                  </th>
+                ))}
               </tr>
             </thead>
             <tbody className='bg-white divide-y divide-gray-200'>
-              {staffMembers?.map((staff: any) => (
-                <tr key={staff.id}>
-                  <td className='px-6 py-4 whitespace-nowrap'>
-                    <div className='text-sm font-medium text-gray-900'>
-                      {staff.firstName} {staff.lastName}
-                    </div>
-                  </td>
-                  <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
-                    {staff.email}
-                  </td>
-                  <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
-                    {staff.phone}
-                  </td>
-                  <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
-                    {staff.role}
-                  </td>
-                  <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
-                    {staff.department}
+              {batches && batches.length > 0 ? (
+                batches.map((item: any, index: any) => (
+                  <tr key={index}>
+                    <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
+                      {item?.batchName}
+                    </td>
+                    <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
+                      {item?.className}
+                    </td>
+                    <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500 w-[10vw]'>
+                      <Trash2
+                        className='text-red-700 cursor-pointer h-5 w-5'
+                        onClick={async () => {
+                          await dispatch(deleteBatchRequested(item?.id));
+                        }}
+                      />
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td
+                    colSpan={4}
+                    className='text-center px-6 py-4 text-sm text-gray-500'
+                  >
+                    No data available.
                   </td>
                 </tr>
-              ))}
+              )}
             </tbody>
           </table>
         </div>

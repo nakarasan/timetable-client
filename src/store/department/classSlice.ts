@@ -21,6 +21,19 @@ const ClassSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
+    loadBatchRequested(state, action: PayloadAction<{}>) {
+      state.loading = true;
+      state.error = null;
+    },
+    loadBatchSuccess(state, action: any) {
+      state.loading = false;
+      state.error = null;
+      state.batches = action.payload?.result;
+    },
+    loadBatchFail(state, action: PayloadAction<{}>) {
+      state.loading = false;
+      state.error = action.payload;
+    },
 
     storeClassRequested(state, action: PayloadAction<{}>) {
       state.loading = true;
@@ -32,6 +45,20 @@ const ClassSlice = createSlice({
       state.storeClass = action.payload;
     },
     storeClassFail(state, action: PayloadAction<{}>) {
+      state.loading = false;
+      state.error = action.payload;
+    },
+
+    storeBatchRequested(state, action: PayloadAction<{}>) {
+      state.loading = true;
+      state.error = null;
+    },
+    storeBatchSuccess(state, action: PayloadAction<{}>) {
+      state.loading = false;
+      state.error = null;
+      state.storeBatch = action.payload;
+    },
+    storeBatchFail(state, action: PayloadAction<{}>) {
       state.loading = false;
       state.error = action.payload;
     },
@@ -49,6 +76,19 @@ const ClassSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
+    deleteBatchRequested(state, action: PayloadAction<{}>) {
+      state.loading = true;
+      state.error = null;
+    },
+    deleteBatchSuccess(state, action: PayloadAction<{}>) {
+      state.loading = false;
+      state.error = null;
+      state.deleteClass = action.payload;
+    },
+    deleteBatchFail(state, action: PayloadAction<{}>) {
+      state.loading = false;
+      state.error = action.payload;
+    },
   },
 });
 
@@ -56,12 +96,21 @@ export const {
   loadClassRequested,
   loadClassSuccess,
   loadClassFail,
+  loadBatchRequested,
+  loadBatchSuccess,
+  loadBatchFail,
   storeClassRequested,
   storeClassSuccess,
   storeClassFail,
+  storeBatchRequested,
+  storeBatchSuccess,
+  storeBatchFail,
   deleteClassRequested,
   deleteClassSuccess,
   deleteClassFail,
+  deleteBatchRequested,
+  deleteBatchSuccess,
+  deleteBatchFail,
 } = ClassSlice.actions;
 
 export default ClassSlice.reducer;

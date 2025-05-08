@@ -1,15 +1,11 @@
-import React, { useState } from 'react';
-
-type Department = {
-  id: number;
-  name: string;
-};
-
-const departments: Department[] = [
-  { id: 1, name: 'Computer Science' },
-  { id: 2, name: 'Mathematics' },
-  { id: 3, name: 'Physics' },
-];
+import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { RootState } from 'store';
+import {
+  loadClassRequested,
+  storeBatchRequested,
+} from 'store/department/classSlice';
 
 export const BatchForm = () => {
   const [formData, setFormData] = useState({
@@ -21,17 +17,39 @@ export const BatchForm = () => {
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({
+    setFormData((prev: any) => ({
       ...prev,
       [name]: name === 'classId' ? Number(value) : value,
     }));
   };
 
-  console.log('formData', formData);
+  const { classes } = useSelector((state: RootState) => state.class);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(loadClassRequested({}));
+  }, [dispatch]);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    dispatch(storeBatchRequested(formData));
+  };
+
+  useEffect(() => {
+    if (classes.length > 0 && formData.classId === 0) {
+      setFormData((prev) => ({
+        ...prev,
+        classId: classes[0].id,
+      }));
+    }
+  }, [classes]);
 
   return (
     <div className='bg-white p-8 rounded-xl shadow-md md:min-w-[40vw]'>
-      <form className='space-y-6'>
+      <form
+        className='space-y-6'
+        onSubmit={handleSubmit}
+      >
         <div>
           <label className='block text-sm font-medium text-gray-700 mb-1'>
             Batch Name
@@ -57,18 +75,12 @@ export const BatchForm = () => {
             className='w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:border-indigo-500'
             required
           >
-            <option
-              value=''
-              disabled
-            >
-              Select Department
-            </option>
-            {departments.map((dept) => (
+            {classes?.map((dept: any) => (
               <option
-                key={dept.id}
-                value={dept.id}
+                key={dept?.id}
+                value={dept?.id}
               >
-                {dept.name}
+                {dept?.name}
               </option>
             ))}
           </select>
