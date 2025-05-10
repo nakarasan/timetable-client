@@ -22,37 +22,97 @@ const userSlice = createSlice({
       state.error = action.payload;
     },
 
-    // storeSubjectRequested(state, action: PayloadAction<{}>) {
-    //   state.loading = true;
-    //   state.error = null;
-    // },
-    // storeSubjectSuccess(state, action: PayloadAction<{}>) {
-    //   state.loading = false;
-    //   state.error = null;
-    //   state.storeSubject = action.payload;
-    // },
-    // storeSubjectFail(state, action: PayloadAction<{}>) {
-    //   state.loading = false;
-    //   state.error = action.payload;
-    // },
+    loadStaffsRequested(state, action: PayloadAction<{}>) {
+      state.loading = true;
+      state.error = null;
+    },
+    loadStaffsSuccess(state, action: any) {
+      state.loading = false;
+      state.error = null;
+      state.staffs = action.payload?.result;
+    },
+    loadStaffsFail(state, action: PayloadAction<{}>) {
+      state.loading = false;
+      state.error = action.payload;
+    },
 
-    // deleteSubjectRequested(state, action: PayloadAction<{}>) {
-    //   state.loading = true;
-    //   state.error = null;
-    // },
-    // deleteSubjectSuccess(state, action: PayloadAction<{}>) {
-    //   state.loading = false;
-    //   state.error = null;
-    //   state.deleteCustomers = action.payload;
-    // },
-    // deleteSubjectFail(state, action: PayloadAction<{}>) {
-    //   state.loading = false;
-    //   state.error = action.payload;
-    // },
+    loadAdminsRequested(state, action: PayloadAction<{}>) {
+      state.loading = true;
+      state.error = null;
+    },
+    loadAdminsSuccess(state, action: any) {
+      state.loading = false;
+      state.error = null;
+      state.admins = action.payload?.result;
+    },
+    loadAdminsFail(state, action: PayloadAction<{}>) {
+      state.loading = false;
+      state.error = action.payload;
+    },
+
+    deleteStudentsRequested(state, action: PayloadAction<{}>) {
+      state.loading = true;
+      state.error = null;
+    },
+    deleteStudentsSuccess(state, action: any) {
+      state.loading = false;
+      state.error = null;
+      state.deleteStudent = action.payload?.result;
+    },
+    deleteStudentsFail(state, action: PayloadAction<{}>) {
+      state.loading = false;
+      state.error = action.payload;
+    },
+
+    deleteStaffRequested(state, action: PayloadAction<{}>) {
+      state.loading = true;
+      state.error = null;
+    },
+    deleteStaffSuccess(state, action: any) {
+      state.loading = false;
+      state.error = null;
+      state.deleteStudent = action.payload?.result;
+    },
+    deleteStaffFail(state, action: PayloadAction<{}>) {
+      state.loading = false;
+      state.error = action.payload;
+    },
+
+    deleteAdminRequested(state, action: PayloadAction<{}>) {
+      state.loading = true;
+      state.error = null;
+    },
+    deleteAdminSuccess(state, action: any) {
+      state.loading = false;
+      state.error = null;
+      state.deleteAdmin = action.payload?.result;
+    },
+    deleteAdminFail(state, action: PayloadAction<{}>) {
+      state.loading = false;
+      state.error = action.payload;
+    },
   },
 });
 
-export const { loadStudentsRequested, loadStudentsSuccess, loadStudentsFail } =
-  userSlice.actions;
+export const {
+  loadStudentsRequested,
+  loadStudentsSuccess,
+  loadStudentsFail,
+  loadStaffsRequested,
+  loadStaffsSuccess,
+  loadStaffsFail,
+  loadAdminsRequested,
+  loadAdminsSuccess,
+  loadAdminsFail,
+  deleteStudentsRequested,
+  deleteStudentsSuccess,
+  deleteStudentsFail,
+  deleteStaffRequested,
+  deleteStaffSuccess,
+  deleteStaffFail,
+  deleteAdminRequested,
+  deleteAdminSuccess,
+  deleteAdminFail,
+} = userSlice.actions;
 
 export default userSlice.reducer;

@@ -7,7 +7,7 @@ import {
   loadClassRequested,
 } from 'store/department/classSlice';
 
-export const StaffForm = () => {
+export const UserForm = () => {
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -16,7 +16,7 @@ export const StaffForm = () => {
     address: '',
     email: '',
     password: '',
-    userType: 1,
+    userType: 2,
   });
 
   const handleChange = (
@@ -29,7 +29,6 @@ export const StaffForm = () => {
     }));
   };
 
-  const { batches } = useSelector((state: RootState) => state.class);
   const dispatch = useDispatch();
 
   useEffect(() => {

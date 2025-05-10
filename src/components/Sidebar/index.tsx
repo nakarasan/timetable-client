@@ -46,6 +46,7 @@ const Sidebar = () => {
         },
       ],
     },
+    { name: 'Users', icon: UsersIcon, path: '/users' },
     { name: 'Message', icon: BellIcon, path: '/message' },
     { name: 'Help', icon: QuestionMarkCircleIcon, path: '/help' },
   ];

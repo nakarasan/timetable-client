@@ -14,6 +14,7 @@ import { AdminDashboard } from 'pages/AdminDashboard';
 import { AddTimetable } from 'pages/Timetable';
 import { Batches } from 'pages/Batches';
 import { Subjects } from 'pages/Subjects';
+import { Users } from 'pages/Users';
 
 const Router = () => {
   const { auth } = useSelector((state: RootState) => state.auth);
@@ -90,6 +91,10 @@ const Router = () => {
           <Route
             path='/master-data/departments'
             element={<Departments />}
+          />
+          <Route
+            path='/users'
+            element={<Users />}
           />
           <Route
             path='/master-data/batches'

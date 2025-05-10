@@ -1,22 +1,22 @@
 import { Modal } from 'components/Model';
 import React, { useEffect, useState } from 'react';
 import { StudentForm } from './form';
-import {
-  deleteBatchRequested,
-  loadBatchRequested,
-} from 'store/department/classSlice';
+import { loadBatchRequested } from 'store/department/classSlice';
 import { useDispatch } from 'react-redux';
 import { RootState } from 'store';
 import { useSelector } from 'react-redux';
 import { Trash2 } from 'lucide-react';
-import { loadStudentsRequested } from 'store/user/userSlice';
+import {
+  deleteStudentsRequested,
+  loadStudentsRequested,
+} from 'store/user/userSlice';
 
 export const Students = () => {
   const [createOpen, setCreateOpen] = useState(false);
   const dispatch = useDispatch();
   const { batches } = useSelector((state: RootState) => state.class);
   const { auth } = useSelector((state: RootState) => state.auth);
-  const { students } = useSelector((state: RootState) => state.user);
+  const { students, staffs } = useSelector((state: RootState) => state.user);
 
   useEffect(() => {
     const fetchSubjects = async () => {
@@ -34,7 +34,7 @@ export const Students = () => {
     fetchSubjects();
   }, []);
 
-  console.log('students', students);
+
 
   return (
     <div>
@@ -73,7 +73,7 @@ export const Students = () => {
                 students?.map((item: any, index: any) => (
                   <tr key={index}>
                     <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
-                     {`${item?.firstName} ${item?.lastName}`}
+                      {`${item?.firstName} ${item?.lastName}`}
                     </td>
                     <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
                       {item?.email}
@@ -91,7 +91,7 @@ export const Students = () => {
                       <Trash2
                         className='text-red-700 cursor-pointer h-5 w-5'
                         onClick={async () => {
-                          await dispatch(deleteBatchRequested(item?.id));
+                          await dispatch(deleteStudentsRequested(item?.userId));
                         }}
                       />
                     </td>

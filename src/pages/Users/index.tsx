@@ -1,41 +1,33 @@
 import { Modal } from 'components/Model';
 import React, { useEffect, useState } from 'react';
-import { StaffForm } from './form';
-import { loadBatchRequested } from 'store/department/classSlice';
+import { UserForm } from './form';
 import { useDispatch } from 'react-redux';
 import { RootState } from 'store';
 import { useSelector } from 'react-redux';
 import { Trash2 } from 'lucide-react';
 import {
+  deleteAdminRequested,
   deleteStaffRequested,
-  deleteStudentsRequested,
-  loadStaffsRequested,
-  loadStudentsRequested,
+  loadAdminsRequested,
 } from 'store/user/userSlice';
 
-export const Staffs = () => {
+export const Users = () => {
   const [createOpen, setCreateOpen] = useState(false);
   const dispatch = useDispatch();
   const { auth } = useSelector((state: RootState) => state.auth);
-  const {  staffs } = useSelector((state: RootState) => state.user);
+  const {  admins } = useSelector((state: RootState) => state.user);
 
   useEffect(() => {
     const fetchSubjects = async () => {
       setCreateOpen(false);
-      await dispatch(loadStaffsRequested({}));
+      await dispatch(loadAdminsRequested({}));
     };
 
     fetchSubjects();
   }, [auth]);
 
-  // useEffect(() => {
-  //   const fetchSubjects = async () => {
-  //     await dispatch(loadBatchRequested({}));
-  //   };
-  //   fetchSubjects();
-  // }, []);
 
-  console.log('staffs', staffs);
+  console.log('admins', admins);
 
   return (
     <div>
@@ -44,7 +36,7 @@ export const Staffs = () => {
           onClick={() => setCreateOpen(true)}
           className='bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-6 py-2 rounded-lg shadow transition'
         >
-          Add New Staff
+          Add New User
         </button>
       </div>
       <div className='bg-white rounded-xl shadow-md border border-gray-200 overflow-hidden'>
@@ -52,25 +44,21 @@ export const Staffs = () => {
           <table className='min-w-full divide-y divide-gray-200'>
             <thead className='bg-gray-50'>
               <tr>
-                {[
-                  'Name',
-                  'Email',
-                  'Mobile',
-                  'Address',
-                  'Actions',
-                ].map((heading) => (
-                  <th
-                    key={heading}
-                    className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
-                  >
-                    {heading}
-                  </th>
-                ))}
+                {['Name', 'Email', 'Mobile', 'Address', 'Actions'].map(
+                  (heading) => (
+                    <th
+                      key={heading}
+                      className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'
+                    >
+                      {heading}
+                    </th>
+                  )
+                )}
               </tr>
             </thead>
             <tbody className='bg-white divide-y divide-gray-200'>
-              {staffs && staffs.length > 0 ? (
-                staffs?.map((item: any, index: any) => (
+              {admins && admins.length > 0 ? (
+                admins?.map((item: any, index: any) => (
                   <tr key={index}>
                     <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
                       {`${item?.firstName} ${item?.lastName}`}
@@ -88,7 +76,7 @@ export const Staffs = () => {
                       <Trash2
                         className='text-red-700 cursor-pointer h-5 w-5'
                         onClick={async () => {
-                          await dispatch(deleteStaffRequested(item?.userId));
+                          await dispatch(deleteAdminRequested(item?.userId));
                         }}
                       />
                     </td>
@@ -111,8 +99,8 @@ export const Staffs = () => {
       <Modal
         isOpen={createOpen}
         setIsOpen={setCreateOpen}
-        title='Add New Staff'
-        children={<StaffForm />}
+        title='Add User'
+        children={<UserForm />}
       />
     </div>
   );
