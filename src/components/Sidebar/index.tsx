@@ -30,6 +30,16 @@ const Sidebar = () => {
     { name: 'Staffs', icon: UsersIcon, path: '/staffs' },
     { name: 'Students', icon: AcademicCapIcon, path: '/students' },
     {
+      name: 'Teacher-Subjects',
+      icon: AcademicCapIcon,
+      path: '/teacher-subjects',
+    },
+    {
+      name: 'Department-Subjects',
+      icon: AcademicCapIcon,
+      path: '/department-subjects',
+    },
+    {
       name: 'Master Data',
       icon: FolderIcon,
       children: [
@@ -57,9 +67,9 @@ const Sidebar = () => {
   };
   const navigate = useNavigate();
   return (
-    <nav className='px-4 py-6 bg-gray-800 h-screen w-[15rem] pt-24'>
+    <nav className='px-4 py-6 bg-gray-800 h-screen w-[16rem] pt-24'>
       <ul className='space-y-1'>
-        {menuItems.map((item: any) => (
+        {menuItems?.map((item: any) => (
           <li key={item.name}>
             <div>
               <button

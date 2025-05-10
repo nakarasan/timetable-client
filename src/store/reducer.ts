@@ -7,7 +7,7 @@ import subjectReducer from 'store/subject/subjectSlice';
 import classReducer from 'store/department/classSlice';
 import userReducer from 'store/user/userSlice';
 import TeacherSubjectReducer from 'store/teacher-subject/teacher-subject-Slice';
-
+import ClassSubjectReducer from 'store/class-subject/class-subject-Slice';
 import persistConfig from './persist';
 
 const appReducer = combineReducers({
@@ -18,6 +18,7 @@ const appReducer = combineReducers({
   class: classReducer,
   user: userReducer,
   teacher_subject: TeacherSubjectReducer,
+  class_subject: ClassSubjectReducer,
 });
 
 const rootReducer = (state: any, action: any) => {

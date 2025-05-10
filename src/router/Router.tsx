@@ -15,6 +15,8 @@ import { AddTimetable } from 'pages/Timetable';
 import { Batches } from 'pages/Batches';
 import { Subjects } from 'pages/Subjects';
 import { Users } from 'pages/Users';
+import { TeacherSubjects } from 'pages/TeacherSubjects';
+import { ClassSubjects } from 'pages/ClassSubjects';
 
 const Router = () => {
   const { auth } = useSelector((state: RootState) => state.auth);
@@ -93,10 +95,6 @@ const Router = () => {
             element={<Departments />}
           />
           <Route
-            path='/users'
-            element={<Users />}
-          />
-          <Route
             path='/master-data/batches'
             element={<Batches />}
           />
@@ -104,6 +102,20 @@ const Router = () => {
             path='/master-data/subjects'
             element={<Subjects />}
           />
+          <Route
+            path='/users'
+            element={<Users />}
+          />
+
+          <Route
+            path='/teacher-subjects'
+            element={<TeacherSubjects />}
+          />
+          <Route
+            path='/department-subjects'
+            element={<ClassSubjects />}
+          />
+
           <Route
             path='/login'
             element={<Login />}

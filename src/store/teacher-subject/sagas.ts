@@ -19,7 +19,7 @@ export function* loadTeacherSubjectsEffect(action: {
   payload: any;
 }): Generator<any, void, any> {
   try {
-    const { data } = yield call(axiosInstance.get, `${apiURL}/Subject`);
+    const { data } = yield call(axiosInstance.get, `${apiURL}/TeacherSubject`);
     yield put(loadTeacherSubjectsSuccess(data));
   } catch (error: any) {
     yield put(loadTeacherSubjectsFail(error.message));
@@ -33,10 +33,9 @@ export function* storeTeacherSubjectEffect(action: {
   try {
     const { data } = yield call(
       axiosInstance.post,
-      `${apiURL}/Subject`,
+      `${apiURL}/TeacherSubject`,
       action.payload
     );
-    console.log('dddd', data);
 
     if (data?.succeeded) {
       yield put(storeTeacherSubjectSuccess(data));
@@ -44,7 +43,6 @@ export function* storeTeacherSubjectEffect(action: {
         payload: {},
         type: '',
       });
-      toast.success('Subject created successfully');
     } else {
       toast.error('Customer create failed! ', data?.errors);
     }
@@ -60,16 +58,14 @@ export function* deleteTeacherSubjectEffect(action: {
   try {
     const { data } = yield call(
       axiosInstance.delete,
-      `${apiURL}/Subject/${action.payload?.subjectId}`
+      `${apiURL}/TeacherSubject/${action.payload}`
     );
-    if (data?.succeeded) {
-      yield put(deleteTeacherSubjectSuccess(data));
-      yield call(loadTeacherSubjectsEffect, {
-        payload: {},
-        type: '',
-      });
-      toast.success('Subject deleted successfully');
-    }
+    yield put(deleteTeacherSubjectSuccess(data));
+    yield call(loadTeacherSubjectsEffect, {
+      payload: {},
+      type: '',
+    });
+    toast.success('Subject deleted successfully');
   } catch (error: any) {
     yield put(deleteTeacherSubjectFail(error.message));
   }
