@@ -20,8 +20,23 @@ import {
   deleteAdminRequested,
   deleteAdminSuccess,
   deleteAdminFail,
+  loadUserRequested,
+  loadUserSuccess,
+  loadUserFail,
 } from './userSlice';
 import toast from 'react-hot-toast';
+
+export function* loadUserEffect(action: {
+  type: string;
+  payload: any;
+}): Generator<any, void, any> {
+  try {
+    const { data } = yield call(axiosInstance.get, `${apiURL}/Auth/user/${action.payload}`);
+    yield put(loadUserSuccess(data));
+  } catch (error: any) {
+    yield put(loadUserFail(error.message));
+  }
+}
 
 export function* loadStudentsEffect(action: {
   type: string;
@@ -132,4 +147,5 @@ export function* userSaga(): Generator<any, void, any> {
   yield takeEvery(deleteStudentsRequested, deleteStudentEffect);
   yield takeEvery(deleteStaffRequested, deleteStaffEffect);
   yield takeEvery(deleteAdminRequested, deleteAdminEffect);
+  yield takeEvery(loadUserRequested, loadUserEffect);
 }

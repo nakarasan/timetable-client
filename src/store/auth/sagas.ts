@@ -26,11 +26,11 @@ function* loginEffect(action: {
 
     if (data?.succeeded) {
       yield put(loginSuccess(data));
-      if (data?.result?.userType === 'Student') {
+      if (data?.result?.userType === 0) {
         navigate('/students/dashboard');
-      } else if (data?.result?.userType === 'Teacher') {
+      } else if (data?.result?.userType === 1) {
         navigate('/staffs/dashboard');
-      } else if (data?.result?.userType === 'Admin') {
+      } else if (data?.result?.userType === 2) {
         navigate('/');
       }
       toast.success('Login succeessfully');

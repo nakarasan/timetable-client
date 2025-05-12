@@ -22,6 +22,20 @@ const userSlice = createSlice({
       state.error = action.payload;
     },
 
+    loadUserRequested(state, action: PayloadAction<{}>) {
+      state.loading = true;
+      state.error = null;
+    },
+    loadUserSuccess(state, action: any) {
+      state.loading = false;
+      state.error = null;
+      state.user = action.payload?.result;
+    },
+    loadUserFail(state, action: PayloadAction<{}>) {
+      state.loading = false;
+      state.error = action.payload;
+    },
+
     loadStaffsRequested(state, action: PayloadAction<{}>) {
       state.loading = true;
       state.error = null;
@@ -95,6 +109,9 @@ const userSlice = createSlice({
 });
 
 export const {
+  loadUserRequested,
+  loadUserSuccess,
+  loadUserFail,
   loadStudentsRequested,
   loadStudentsSuccess,
   loadStudentsFail,

@@ -29,7 +29,7 @@ const Router = () => {
   const AdminRoute: React.FC<{ children: React.ReactNode }> = ({
     children,
   }) => {
-    if (auth?.userType !== 'Admin') {
+    if (auth?.userType !== 2) {
       return (
         <Navigate
           to='/login'
@@ -43,7 +43,7 @@ const Router = () => {
   const StudentRoute: React.FC<{ children: React.ReactNode }> = ({
     children,
   }) => {
-    if (auth?.userType !== 'Student') {
+    if (auth?.userType !== 0) {
       return (
         <Navigate
           to='/login'
@@ -56,7 +56,7 @@ const Router = () => {
   const StaffRoute: React.FC<{ children: React.ReactNode }> = ({
     children,
   }) => {
-    if (auth?.userType !== 'Teacher') {
+    if (auth?.userType !== 1) {
       return (
         <Navigate
           to='/login'

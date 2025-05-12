@@ -34,7 +34,7 @@ const authSlice = createSlice({
     registerSuccess(state, action: PayloadAction<any>) {
       state.loading = false;
       state.error = null;
-      state.auth = action.payload.result;
+      state.register = action.payload.result;
     },
     registerFailure(state, action: PayloadAction<any>) {
       state.loading = false;

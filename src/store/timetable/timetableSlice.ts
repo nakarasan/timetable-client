@@ -3,6 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 const initialState: any = {
   loading: false,
   error: null,
+  teacherTimeTable: [],
 };
 const timetableSlice = createSlice({
   name: 'customers',
@@ -32,6 +33,20 @@ const timetableSlice = createSlice({
       state.batchTimeTable = action.payload;
     },
     loadTimetableByBatchFail(state, action: PayloadAction<{}>) {
+      state.loading = false;
+      state.error = action.payload;
+    },
+
+    loadTimetableByTeacherRequested(state, action: PayloadAction<{}>) {
+      state.loading = true;
+      state.error = null;
+    },
+    loadTimetableByTeacherSuccess(state, action: any) {
+      state.loading = false;
+      state.error = null;
+      state.teacherTimeTable = action.payload;
+    },
+    loadTimetableByTeacherFail(state, action: PayloadAction<{}>) {
       state.loading = false;
       state.error = action.payload;
     },
@@ -73,6 +88,9 @@ export const {
   loadTimetableByBatchRequested,
   loadTimetableByBatchSuccess,
   loadTimetableByBatchFail,
+  loadTimetableByTeacherRequested,
+  loadTimetableByTeacherSuccess,
+  loadTimetableByTeacherFail,
   loadTimetableByStaffRequested,
   loadTimetableByStaffSuccess,
   loadTimetableByStaffFail,

@@ -9,7 +9,7 @@ export default function StudentLayout() {
         <Header />
       </div>
 
-      <div className='w-full bg-gray-100 pt-20 px-4'>
+      <div className='w-full pt-20 px-4'>
         <Outlet />
       </div>
     </div>

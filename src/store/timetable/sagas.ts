@@ -8,6 +8,9 @@ import {
   loadTimetableByBatchRequested,
   loadTimetableByBatchSuccess,
   loadTimetableByBatchFail,
+  loadTimetableByTeacherRequested,
+  loadTimetableByTeacherSuccess,
+  loadTimetableByTeacherFail,
   loadTimetableByStaffRequested,
   loadTimetableByStaffSuccess,
   loadTimetableByStaffFail,
@@ -47,6 +50,21 @@ export function* loadTimetableByBatchEffect(action: {
   }
 }
 
+export function* loadTimetableByTeacherEffect(action: {
+  type: string;
+  payload: any;
+}): Generator<any, void, any> {
+  try {
+    const { data } = yield call(
+      axiosInstance.get,
+      `${apiURL}/TimeTable/ByTeacher/${action?.payload}?export=false`
+    );
+    yield put(loadTimetableByTeacherSuccess(data));
+  } catch (error: any) {
+    yield put(loadTimetableByTeacherFail(error.message));
+  }
+}
+
 export function* loadTimetableByStaffEffect(action: {
   type: string;
   payload: any;
@@ -73,10 +91,10 @@ export function* generateTimetableEffect(action: {
       action.payload
     );
     yield put(generateTimetableSuccess(data));
-     yield call(loadTimetableByBatchEffect, {
-       payload: {},
-       type: '',
-     });
+    yield call(loadTimetableByBatchEffect, {
+      payload: {},
+      type: '',
+    });
     toast.success('Subject created successfully');
   } catch (error: any) {
     yield put(generateTimetableFail(error.message));
@@ -87,5 +105,9 @@ export function* timetableSaga(): Generator<any, void, any> {
   yield takeEvery(generateTimetableRequested, generateTimetableEffect);
   yield takeEvery(loadTimetableRequested, loadTimetableEffect);
   yield takeEvery(loadTimetableByBatchRequested, loadTimetableByBatchEffect);
+  yield takeEvery(
+    loadTimetableByTeacherRequested,
+    loadTimetableByTeacherEffect
+  );
   yield takeEvery(loadTimetableByStaffRequested, loadTimetableByStaffEffect);
 }
