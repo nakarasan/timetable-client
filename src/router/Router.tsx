@@ -17,6 +17,7 @@ import { Subjects } from 'pages/Subjects';
 import { Users } from 'pages/Users';
 import { TeacherSubjects } from 'pages/TeacherSubjects';
 import { ClassSubjects } from 'pages/ClassSubjects';
+import { Help } from 'pages/Help';
 
 const Router = () => {
   const { auth } = useSelector((state: RootState) => state.auth);
@@ -75,16 +76,12 @@ const Router = () => {
           element={<Layout />}
         >
           <Route
-            index
-            element={<AdminDashboard />}
+            path='/'
+            element={<TimeTable />}
           />
           <Route
             path='/staffs'
             element={<Staffs />}
-          />
-          <Route
-            path='/timetable'
-            element={<TimeTable />}
           />
           <Route
             path='/students'
@@ -114,6 +111,10 @@ const Router = () => {
           <Route
             path='/department-subjects'
             element={<ClassSubjects />}
+          />
+          <Route
+            path='/help'
+            element={<Help />}
           />
 
           <Route
