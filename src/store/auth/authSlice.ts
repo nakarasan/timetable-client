@@ -1,10 +1,10 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 const initialState: any = {
   loading: false,
   auth: null,
   error: null,
-  tokenType: "Bearer",
+  tokenType: 'Bearer',
   selectedOption: null,
 };
 
@@ -12,17 +12,14 @@ const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    loginRequested(
-      state,
-      action: PayloadAction<any>
-    ) {
+    loginRequested(state, action: PayloadAction<any>) {
       state.loading = true;
       state.error = null;
     },
     loginSuccess(state, action: PayloadAction<any>) {
       state.loading = false;
       state.error = null;
-      state.auth = action.payload;
+      state.auth = action.payload?.result;
     },
 
     loginFailure(state, action: PayloadAction<any>) {

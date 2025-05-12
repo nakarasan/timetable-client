@@ -24,12 +24,12 @@ import { StaffDashboard } from 'pages/StaffDashboard';
 
 const Router = () => {
   const { auth } = useSelector((state: RootState) => state.auth);
-console.log('auth', auth);
+  console.log('auth', auth);
 
   const AdminRoute: React.FC<{ children: React.ReactNode }> = ({
     children,
   }) => {
-    if (auth?.type != 'admin') {
+    if (auth?.userType !== 'Admin') {
       return (
         <Navigate
           to='/login'
@@ -39,10 +39,11 @@ console.log('auth', auth);
     }
     return <>{children}</>;
   };
+
   const StudentRoute: React.FC<{ children: React.ReactNode }> = ({
     children,
   }) => {
-    if (auth?.type != 'admin') {
+    if (auth?.userType !== 'Student') {
       return (
         <Navigate
           to='/login'
@@ -55,7 +56,7 @@ console.log('auth', auth);
   const StaffRoute: React.FC<{ children: React.ReactNode }> = ({
     children,
   }) => {
-    if (auth?.type != 'admin') {
+    if (auth?.userType !== 'Teacher') {
       return (
         <Navigate
           to='/login'
@@ -68,15 +69,6 @@ console.log('auth', auth);
   return (
     <BrowserRouter>
       <Routes>
-        {/* <Route
-          path='/'
-          element={
-            <AdminRoute>
-              <Dashboard />
-            </AdminRoute>
-          }
-        ></Route> */}
-
         <Route
           path='/login'
           element={<Login />}
@@ -96,17 +88,25 @@ console.log('auth', auth);
 
         <Route
           path='/students/dashboard'
-          element={<StudentLayout />}
+          element={
+            <StudentRoute>
+              <StudentLayout />
+            </StudentRoute>
+          }
         >
           <Route
-            path='/students/dashboard'
+            index
             element={<StudentDashboard />}
           />
         </Route>
 
         <Route
           path='/staffs/dashboard'
-          element={<StaffLayout />}
+          element={
+            <StaffRoute>
+              <StaffLayout />
+            </StaffRoute>
+          }
         >
           <Route
             path='/staffs/dashboard'
@@ -116,7 +116,11 @@ console.log('auth', auth);
 
         <Route
           path='/'
-          element={<AdminLayout />}
+          element={
+            <AdminRoute>
+              <AdminLayout />
+            </AdminRoute>
+          }
         >
           <Route
             path='/'

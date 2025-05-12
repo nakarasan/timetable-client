@@ -17,16 +17,23 @@ function* loginEffect(action: {
   payload: any;
 }): Generator<any, void, any> {
   try {
+    const { navigate, ...credentials } = action.payload;
     const { data } = yield call(
       axiosInstance.post,
       `${apiURL}/Auth/login`,
-      action.payload
+      credentials
     );
 
     if (data?.succeeded) {
       yield put(loginSuccess(data));
+      if (data?.result?.userType === 'Student') {
+        navigate('/students/dashboard');
+      } else if (data?.result?.userType === 'Teacher') {
+        navigate('/staffs/dashboard');
+      } else if (data?.result?.userType === 'Admin') {
+        navigate('/');
+      }
       toast.success('Login succeessfully');
-      // window.location.href = "./";
     } else {
       if (data?.errors) {
         toast.error(data?.errors[0]);
