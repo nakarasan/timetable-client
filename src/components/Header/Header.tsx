@@ -62,12 +62,12 @@ const Header: React.FC = () => {
       </div>
 
       <div className='flex items-center space-x-3'>
-        <button className='relative p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700'>
-          <LucideBell className='h-5 w-5' />
+        <button className='relative p-2 rounded-full text-gray-200 hover:bg-gray-700'>
+          <LucideBell className='h-6 w-6' />
           <span className='absolute top-1 right-1 block h-2 w-2 bg-red-500 rounded-full'></span>
         </button>
 
-        <button
+        {/* <button
           onClick={() => setDarkMode(!darkMode)}
           className='p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700'
         >
@@ -76,7 +76,7 @@ const Header: React.FC = () => {
           ) : (
             <Moon className='h-5 w-5 text-gray-600 dark:text-gray-400' />
           )}
-        </button>
+        </button> */}
 
         <div className='relative'>
           <button
@@ -94,23 +94,14 @@ const Header: React.FC = () => {
           </button>
 
           {showDropdown && (
-            <div className='absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700'>
+            <div className='absolute right-0 mt-2 w-28 bg-white border-gray-800 rounded-lg shadow-lg border dark:border-gray-700'>
               <a
-                href='#'
-                className='block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700'
-              >
-                Profile
-              </a>
-              <a
-                href='#'
-                className='block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700'
-              >
-                Settings
-              </a>
-              <div className='border-t border-gray-200 dark:border-gray-700'></div>
-              <a
-                href='#'
-                className='block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700'
+                className='block px-4 py-2 text-sm cursor-pointer'
+                onClick={() => {
+                  localStorage.clear();
+                  setShowDropdown(false);
+                  navigate("/login");
+                }}
               >
                 Sign Out
               </a>
