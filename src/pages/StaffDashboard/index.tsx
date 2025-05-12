@@ -1,9 +1,11 @@
-import React, { useEffect } from 'react';
+import { Modal } from 'components/Model';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { RootState } from 'store';
 import { loadTimetableByTeacherRequested } from 'store/timetable/timetableSlice';
 import { loadUserRequested } from 'store/user/userSlice';
+import { MessageForm } from './MessageForm';
 
 type TimetableEntry = {
   className: string;
@@ -25,7 +27,6 @@ const daysOfWeek = [
   'Saturday',
   'Sunday',
 ];
-
 
 export const StaffDashboard = () => {
   const { auth } = useSelector((state: RootState) => state.auth);
@@ -66,8 +67,18 @@ export const StaffDashboard = () => {
   console.log('user', user);
   console.log('teacherTimeTable', teacherTimeTable);
 
+  const [createOpen, setCreateOpen] = useState(false);
+
   return (
     <div>
+      <div className='flex justify-end pb-2 mr-4'>
+        <button
+          onClick={() => setCreateOpen(true)}
+          className='bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-6 py-2 rounded-lg shadow transition'
+        >
+          Send Message
+        </button>
+      </div>
       <div className=''>
         <div className='overflow-x-auto p-4'>
           <table className='min-w-full table-auto border border-gray-300 shadow-md'>
@@ -122,6 +133,12 @@ export const StaffDashboard = () => {
           </table>
         </div>
       </div>
+      <Modal
+        isOpen={createOpen}
+        setIsOpen={setCreateOpen}
+        title='Send Message'
+        children={<MessageForm />}
+      />
     </div>
   );
 };

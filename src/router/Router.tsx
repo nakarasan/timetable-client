@@ -21,6 +21,8 @@ import { StudentDashboard } from 'pages/StudentDashboard';
 import StudentLayout from 'layout/StudentLayout';
 import StaffLayout from 'layout/StaffLayout';
 import { StaffDashboard } from 'pages/StaffDashboard';
+import StaffProfile from 'pages/StaffProfile';
+import StudentProfile from 'pages/StudentProfile';
 
 const Router = () => {
   const { auth } = useSelector((state: RootState) => state.auth);
@@ -87,7 +89,7 @@ const Router = () => {
         />
 
         <Route
-          path='/students/dashboard'
+          path='/students'
           element={
             <StudentRoute>
               <StudentLayout />
@@ -95,13 +97,21 @@ const Router = () => {
           }
         >
           <Route
-            index
+            path='/students/dashboard'
             element={<StudentDashboard />}
+          />
+          <Route
+            path='/students/profile'
+            element={<StudentProfile />}
+          />
+          <Route
+            path='/students/help'
+            element={<Help />}
           />
         </Route>
 
         <Route
-          path='/staffs/dashboard'
+          path='/staffs'
           element={
             <StaffRoute>
               <StaffLayout />
@@ -111,6 +121,14 @@ const Router = () => {
           <Route
             path='/staffs/dashboard'
             element={<StaffDashboard />}
+          />
+          <Route
+            path='/staffs/profile'
+            element={<StaffProfile />}
+          />
+          <Route
+            path='/staffs/help'
+            element={<Help />}
           />
         </Route>
 
