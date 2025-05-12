@@ -13,31 +13,32 @@ export const accessToken = createDraftSafeSelector(
   (state) => state?.token
 );
 
+
 export const user = createDraftSafeSelector(auth, (state) => state?.user);
 
 export const tokenType = createDraftSafeSelector(auth, (state) => 'Bearer');
 
-export const tokenExpiresIn = createDraftSafeSelector(accessToken, (token) =>
-  token ? jwtDecode<IAccessToken>(token).exp : null
-);
-export const userId = createDraftSafeSelector(accessToken, (token) =>
-  token ? jwtDecode<IAccessToken>(token).exp : null
-);
+// export const tokenExpiresIn = createDraftSafeSelector(accessToken, (token) =>
+//   token ? jwtDecode<IAccessToken>(token).exp : null
+// );
+// export const userId = createDraftSafeSelector(accessToken, (token) =>
+//   token ? jwtDecode<IAccessToken>(token).exp : null
+// );
 
-export const accessTokenWithType = createDraftSafeSelector(
-  [tokenType, accessToken],
-  (type, token) => (type && token ? `${type} ${token}` : null)
-);
+// export const accessTokenWithType = createDraftSafeSelector(
+//   [tokenType, accessToken],
+//   (type, token) => (type && token ? `${type} ${token}` : null)
+// );
 
-export const isTokenValid = createDraftSafeSelector(tokenExpiresIn, (expires) =>
-  expires ? moment.unix(expires).isSameOrAfter(moment()) : false
-);
+// export const isTokenValid = createDraftSafeSelector(tokenExpiresIn, (expires) =>
+//   expires ? moment.unix(expires).isSameOrAfter(moment()) : false
+// );
 
-export const isAuthorized = createDraftSafeSelector(
-  [isTokenValid, user],
-  (valid, userObj) => valid && userObj?.username !== undefined
-);
+// export const isAuthorized = createDraftSafeSelector(
+//   [isTokenValid, user],
+//   (valid, userObj) => valid && userObj?.username !== undefined
+// );
 
 export const permission = (state: RootState) => {
-  return state?.auth?.permission?.userRoles?.[0]?.rolePermissions;
+  return state?.auth?.result?.userType;
 };

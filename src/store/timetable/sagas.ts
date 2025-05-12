@@ -72,8 +72,6 @@ export function* generateTimetableEffect(action: {
       `${apiURL}/TimeTable/Generate`,
       action.payload
     );
-    console.log('dddd', data);
-
     yield put(generateTimetableSuccess(data));
      yield call(loadTimetableByBatchEffect, {
        payload: {},

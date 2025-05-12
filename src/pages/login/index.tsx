@@ -1,11 +1,30 @@
-import React from "react";
-import login from "assets/login2.gif";
-import Microsoft from "assets/microsoft.png";
-import Google from "assets/google.png";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from 'react';
+import login from 'assets/login2.gif';
+import Microsoft from 'assets/microsoft.png';
+import Google from 'assets/google.png';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { loginRequested } from 'store/auth/authSlice';
 
 const Login = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '', // Store selected department id
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+
+
   return (
     <div className='flex justify-center items-center min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4'>
       <div className='w-full max-w-4xl bg-white shadow-xl rounded-3xl overflow-hidden flex flex-col md:flex-row'>
@@ -25,18 +44,28 @@ const Login = () => {
             <h1 className='text-3xl font-bold text-blue-700  mb-2'>Sign In</h1>
             <p className='text-gray-500'>Enter your credentials to continue</p>
           </div>
-          <form className='space-y-6'>
+          <form
+            className='space-y-3'
+            onSubmit={(e) => {
+              e.preventDefault(); // Prevent page reload
+              dispatch(loginRequested(formData));
+            }}
+          >
             <div>
               <label className='block text-sm font-medium text-gray-700 mb-1'>
                 Email Address
               </label>
               <input
                 type='email'
-                placeholder='enter you email address'
-                className='w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200'
+                name='email'
+                placeholder='Enter your email address'
+                value={formData.email}
+                onChange={handleChange}
+                className='w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200'
                 required
               />
             </div>
+
             <div>
               <div className='flex justify-between items-center mb-1'>
                 <label className='block text-sm font-medium text-gray-700'>
@@ -45,8 +74,11 @@ const Login = () => {
               </div>
               <input
                 type='password'
-                placeholder=' Enter your password'
-                className='w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200'
+                name='password'
+                value={formData.password}
+                onChange={handleChange}
+                placeholder='Enter your password'
+                className='w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-200'
                 required
               />
               <a
@@ -56,14 +88,16 @@ const Login = () => {
                 Forgot password?
               </a>
             </div>
+
             <button
-              onClick={() => navigate('/')}
+              // onClick={() => navigate('/')}
               type='submit'
-              className='w-full bg-blue-300 to-indigo-900  hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-lg transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2'
+              className='w-full bg-blue-300 to-indigo-900 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-lg transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2'
             >
               Sign In
             </button>
           </form>
+
           <div className='mt-6 text-center'>
             <p className='text-sm text-gray-600'>
               Don't have an account?{' '}

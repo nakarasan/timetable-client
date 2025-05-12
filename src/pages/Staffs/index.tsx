@@ -28,14 +28,7 @@ export const Staffs = () => {
     fetchSubjects();
   }, [auth]);
 
-  // useEffect(() => {
-  //   const fetchSubjects = async () => {
-  //     await dispatch(loadBatchRequested({}));
-  //   };
-  //   fetchSubjects();
-  // }, []);
 
-  console.log('staffs', staffs);
 
   return (
     <div>

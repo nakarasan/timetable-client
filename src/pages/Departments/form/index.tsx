@@ -16,15 +16,14 @@ export const DepartmentForm = () => {
   };
 
   const dispatch = useDispatch();
-  console.log('formData', formData);
 
   return (
     <div className='bg-white p-8 rounded-xl shadow-md md:min-w-[40vw]'>
       <form
-         onSubmit={(e) => {
-                  e.preventDefault(); // Prevent page reload
-                  dispatch(storeClassRequested(formData));
-                }}
+        onSubmit={(e) => {
+          e.preventDefault();
+          dispatch(storeClassRequested(formData));
+        }}
         className='space-y-6'
       >
         <div>

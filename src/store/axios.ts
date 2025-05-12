@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { accessTokenWithType } from 'store/auth/selector';
+// import { accessTokenWithType } from 'store/auth/selector';
 import { apiURL } from 'constants/url';
 
 export const axiosInstance = axios.create({
@@ -17,7 +17,7 @@ export function createAxios({ getState }: { getState: any }) {
       const { useAuth, ...headers } = config.headers;
 
       const state = getState();
-      headers.Authorization = accessTokenWithType(state);
+      // headers.Authorization = accessTokenWithType(state);
 
       return { ...config, headers };
     },

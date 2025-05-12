@@ -89,7 +89,6 @@ export const TimeTable: React.FC = () => {
     dispatch(loadTimetableByBatchRequested(formData?.batchId));
   }, [dispatch, formData?.batchId]);
 
-  console.log('batches', formData?.batchId);
 
   return (
     <div>

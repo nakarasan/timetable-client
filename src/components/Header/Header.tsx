@@ -15,7 +15,6 @@ const Header: React.FC = () => {
   const [showMenu, setShowMenu] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const handleLogout = () => {
-    console.log('Logged Out');
     setShowMenu(false);
     // navigate(routes.LOGIN);
   };

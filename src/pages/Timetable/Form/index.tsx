@@ -86,7 +86,6 @@ export const TimetableForm = () => {
 
   const { onGenereteTimetable } = useGenerateTimetable();
 
-  console.log('subjects', subjects);
   
 
   return (

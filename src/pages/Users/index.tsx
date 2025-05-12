@@ -27,7 +27,6 @@ export const Users = () => {
   }, [auth]);
 
 
-  console.log('admins', admins);
 
   return (
     <div>

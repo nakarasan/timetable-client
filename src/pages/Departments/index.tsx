@@ -25,7 +25,6 @@ export const Departments = () => {
     fetchSubjects();
   }, [storeClass]);
 
-  console.log('classes', classes);
 
   return (
     <div>

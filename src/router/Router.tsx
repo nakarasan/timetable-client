@@ -1,6 +1,5 @@
 import React from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
-import { Layout } from 'layout';
 import Signup from 'pages/SignUp';
 import Login from 'pages/login';
 import Forgot_password from 'pages/forgot_password/forgot_password';
@@ -10,7 +9,6 @@ import { useSelector } from 'react-redux';
 import { Staffs } from 'pages/Staffs';
 import { Students } from 'pages/Students';
 import { Departments } from 'pages/Departments';
-import { AdminDashboard } from 'pages/AdminDashboard';
 import { TimeTable } from 'pages/Timetable';
 import { Batches } from 'pages/Batches';
 import { Subjects } from 'pages/Subjects';
@@ -18,9 +16,16 @@ import { Users } from 'pages/Users';
 import { TeacherSubjects } from 'pages/TeacherSubjects';
 import { ClassSubjects } from 'pages/ClassSubjects';
 import { Help } from 'pages/Help';
+import AdminLayout from 'layout/AdminLayout';
+import { StudentDashboard } from 'pages/StudentDashboard';
+import StudentLayout from 'layout/StudentLayout';
+import StaffLayout from 'layout/StaffLayout';
+import { StaffDashboard } from 'pages/StaffDashboard';
 
 const Router = () => {
   const { auth } = useSelector((state: RootState) => state.auth);
+console.log('auth', auth);
+
   const AdminRoute: React.FC<{ children: React.ReactNode }> = ({
     children,
   }) => {
@@ -71,9 +76,47 @@ const Router = () => {
             </AdminRoute>
           }
         ></Route> */}
+
+        <Route
+          path='/login'
+          element={<Login />}
+        />
+        <Route
+          path='/signup'
+          element={<Signup />}
+        />
+        <Route
+          path='/fogot-password'
+          element={<Forgot_password />}
+        />
+        <Route
+          path='/reset-password'
+          element={<Resetpassword />}
+        />
+
+        <Route
+          path='/students/dashboard'
+          element={<StudentLayout />}
+        >
+          <Route
+            path='/students/dashboard'
+            element={<StudentDashboard />}
+          />
+        </Route>
+
+        <Route
+          path='/staffs/dashboard'
+          element={<StaffLayout />}
+        >
+          <Route
+            path='/staffs/dashboard'
+            element={<StaffDashboard />}
+          />
+        </Route>
+
         <Route
           path='/'
-          element={<Layout />}
+          element={<AdminLayout />}
         >
           <Route
             path='/'
@@ -115,23 +158,6 @@ const Router = () => {
           <Route
             path='/help'
             element={<Help />}
-          />
-
-          <Route
-            path='/login'
-            element={<Login />}
-          />
-          <Route
-            path='/signup'
-            element={<Signup />}
-          />
-          <Route
-            path='/fogot-password'
-            element={<Forgot_password />}
-          />
-          <Route
-            path='/reset-password'
-            element={<Resetpassword />}
           />
         </Route>
       </Routes>

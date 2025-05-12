@@ -27,7 +27,6 @@ export const TeacherSubjects = () => {
     fetchSubjects();
   }, [storeTeacherSubject]);
 
-  console.log('teacherSubjects', teacherSubjects);
 
   return (
     <div>

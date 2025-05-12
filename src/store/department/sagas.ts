@@ -57,7 +57,6 @@ export function* storeClassEffect(action: {
       `${apiURL}/Class`,
       action.payload
     );
-    console.log('dddd', data);
 
     if (data?.succeeded) {
       yield put(storeClassSuccess(data));
@@ -84,7 +83,6 @@ export function* storeBatchEffect(action: {
       `${apiURL}/Batch`,
       action.payload
     );
-    console.log('dddd', data);
 
     if (data?.succeeded) {
       yield put(storeBatchSuccess(data));

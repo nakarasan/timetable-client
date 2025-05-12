@@ -44,7 +44,6 @@ export const StaffForm = () => {
   };
 
 
-  console.log('formData', formData);
 
   return (
     <div className='bg-white p-8 rounded-xl shadow-md md:min-w-[40vw]'>

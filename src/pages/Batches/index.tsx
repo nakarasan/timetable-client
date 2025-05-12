@@ -27,7 +27,6 @@ export const Batches = () => {
     fetchSubjects();
   }, [storeBatch]);
 
-  console.log('batches', batches);
 
   return (
     <div>

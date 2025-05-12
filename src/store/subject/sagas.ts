@@ -65,7 +65,6 @@ export function* storeSubjectEffect(action: {
       `${apiURL}/Subject`,
       action.payload
     );
-    console.log('dddd', data);
 
     if (data?.succeeded) {
       yield put(storeSubjectSuccess(data));

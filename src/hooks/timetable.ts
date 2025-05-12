@@ -7,8 +7,6 @@ export function useGenerateTimetable() {
 
   const onGenereteTimetable = useCallback(
     async (values: any) => {
-      console.log('values', values);
-      debugger;
       await dispatch(
         generateTimetableRequested({
           minimumTeachersPerWeek: 0,
