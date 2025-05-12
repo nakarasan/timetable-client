@@ -48,7 +48,6 @@ export const Subjects = () => {
     fetchSubjects();
   }, [storeSubject]);
 
-  console.log('subjects', subjects);
 
   return (
     <div>

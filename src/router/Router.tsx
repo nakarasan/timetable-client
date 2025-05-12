@@ -11,7 +11,7 @@ import { Staffs } from 'pages/Staffs';
 import { Students } from 'pages/Students';
 import { Departments } from 'pages/Departments';
 import { AdminDashboard } from 'pages/AdminDashboard';
-import { AddTimetable } from 'pages/Timetable';
+import { TimeTable } from 'pages/Timetable';
 import { Batches } from 'pages/Batches';
 import { Subjects } from 'pages/Subjects';
 import { Users } from 'pages/Users';
@@ -84,7 +84,7 @@ const Router = () => {
           />
           <Route
             path='/timetable'
-            element={<AddTimetable />}
+            element={<TimeTable />}
           />
           <Route
             path='/students'

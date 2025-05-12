@@ -7,6 +7,7 @@ import { classSaga } from './department/sagas';
 import { userSaga } from './user/sagas';
 import { teachersubjectSaga } from './teacher-subject/sagas';
 import { classsubjectSaga } from './class-subject/sagas';
+import { timetableSaga } from './timetable/sagas';
 
 export function* rootSaga() {
   yield all([
@@ -18,5 +19,6 @@ export function* rootSaga() {
     userSaga(),
     teachersubjectSaga(),
     classsubjectSaga(),
+    timetableSaga(),
   ]);
 }

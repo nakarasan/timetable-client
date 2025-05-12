@@ -8,6 +8,7 @@ import classReducer from 'store/department/classSlice';
 import userReducer from 'store/user/userSlice';
 import TeacherSubjectReducer from 'store/teacher-subject/teacher-subject-Slice';
 import ClassSubjectReducer from 'store/class-subject/class-subject-Slice';
+import timetableReducer from 'store/timetable/timetableSlice';
 import persistConfig from './persist';
 
 const appReducer = combineReducers({
@@ -19,6 +20,7 @@ const appReducer = combineReducers({
   user: userReducer,
   teacher_subject: TeacherSubjectReducer,
   class_subject: ClassSubjectReducer,
+  timetable: timetableReducer,
 });
 
 const rootReducer = (state: any, action: any) => {
