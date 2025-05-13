@@ -48,10 +48,10 @@ export const StudentForm = () => {
   };
 
   useEffect(() => {
-    if (batches.length > 0 && formData.batchId === 0) {
+    if (batches?.length > 0 && formData?.batchId === 0) {
       setFormData((prev) => ({
         ...prev,
-        batchId: batches[0].id,
+        batchId: batches[0]?.id,
       }));
     }
   }, [batches]);

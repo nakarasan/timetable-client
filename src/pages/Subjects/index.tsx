@@ -77,8 +77,8 @@ export const Subjects = () => {
               </tr>
             </thead>
             <tbody className='bg-white divide-y divide-gray-200'>
-              {subjects && subjects.length > 0 ? (
-                subjects.map((subject: any, index: any) => (
+              {subjects && subjects?.length > 0 ? (
+                subjects?.map((subject: any, index: any) => (
                   <tr key={index}>
                     <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
                       {subject?.name}

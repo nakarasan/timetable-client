@@ -62,7 +62,7 @@ export const Staffs = () => {
               </tr>
             </thead>
             <tbody className='bg-white divide-y divide-gray-200'>
-              {staffs && staffs.length > 0 ? (
+              {staffs && staffs?.length > 0 ? (
                 staffs?.map((item: any, index: any) => (
                   <tr key={index}>
                     <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>

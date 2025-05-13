@@ -31,6 +31,10 @@ const daysOfWeek = [
 export const StaffDashboard = () => {
   const { auth } = useSelector((state: RootState) => state.auth);
   const { user } = useSelector((state: RootState) => state.user);
+  const { storeMessage } = useSelector((state: RootState) => state.message);
+
+
+
   const { teacherTimeTable } = useSelector(
     (state: RootState) => state.timetable
   );
@@ -63,11 +67,11 @@ export const StaffDashboard = () => {
     )
   );
 
-  console.log('auth', auth);
-  console.log('user', user);
-  console.log('teacherTimeTable', teacherTimeTable);
-
   const [createOpen, setCreateOpen] = useState(false);
+
+  useEffect(() => {
+    setCreateOpen(false);
+  }, [storeMessage]);
 
   return (
     <div>

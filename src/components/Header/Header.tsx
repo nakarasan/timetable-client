@@ -1,16 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
-import {
-  Search,
-  Bell as LucideBell,
-  Sun,
-  Moon,
-  ChevronDown,
-  User,
-} from 'lucide-react';
+import { Search, Bell as LucideBell, ChevronDown, User } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import Notification from './Notification';
+import { useSelector } from 'react-redux';
+import { RootState } from 'store';
+import { loadUserRequested } from 'store/user/userSlice';
+import { useDispatch } from 'react-redux';
+import { loadMessageByBatchRequested } from 'store/message/messageSlice';
 
 const Header: React.FC = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [showMenu, setShowMenu] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -33,9 +33,30 @@ const Header: React.FC = () => {
   }, []);
 
   const [isSidebarOpen, setSidebarOpen] = useState(false);
-  const [activeItem, setActiveItem] = useState('Dashboard');
-  const [darkMode, setDarkMode] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
+
+  const [openNotification, setOpenNotification] = useState(false);
+
+  const { auth } = useSelector((state: RootState) => state.auth);
+  const { user } = useSelector((state: RootState) => state.user);
+  const { messages } = useSelector((state: RootState) => state.message);
+
+  useEffect(() => {
+    const fetchSubjects = async () => {
+      await dispatch(loadUserRequested(auth?.id));
+    };
+    fetchSubjects();
+  }, []);
+
+  console.log('userrrr', user?.details?.batchId);
+  console.log('messages', messages);
+
+  useEffect(() => {
+    const fetchSubjects = async () => {
+      await dispatch(loadMessageByBatchRequested(15));
+    };
+    fetchSubjects();
+  }, [user?.details?.batchId, auth?.id]);
 
   return (
     <header className='fixed left-0 top-0 flex items-center justify-between w-full h-16 px-4 text-gray-700 bg-gray-800 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700'>
@@ -62,10 +83,22 @@ const Header: React.FC = () => {
       </div>
 
       <div className='flex items-center space-x-3'>
-        <button className='relative p-2 rounded-full text-gray-200 hover:bg-gray-700'>
-          <LucideBell className='h-6 w-6' />
-          <span className='absolute top-1 right-1 block h-2 w-2 bg-red-500 rounded-full'></span>
-        </button>
+        {auth?.userType === 0 && (
+          <div className='relative'>
+            <button
+              className='relative p-2 rounded-full text-gray-200 hover:bg-gray-700'
+              onClick={() => setOpenNotification(!openNotification)}
+            >
+              <LucideBell className='h-6 w-6' />
+              <span className='absolute top-1 right-1 block h-2 w-2 bg-red-500 rounded-full'></span>
+            </button>
+            {openNotification && (
+              <div className='absolute left-0 top-0'>
+                <Notification data={messages} />
+              </div>
+            )}
+          </div>
+        )}
 
         {/* <button
           onClick={() => setDarkMode(!darkMode)}
@@ -100,7 +133,7 @@ const Header: React.FC = () => {
                 onClick={() => {
                   localStorage.clear();
                   setShowDropdown(false);
-                  navigate("/login");
+                  navigate('/login');
                 }}
               >
                 Sign Out

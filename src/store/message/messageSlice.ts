@@ -15,7 +15,7 @@ const messageSlice = createSlice({
     loadMessageByBatchSuccess(state, action: any) {
       state.loading = false;
       state.error = null;
-      state.subjects = action.payload?.result;
+      state.messages = action.payload;
     },
     loadMessageByBatchFail(state, action: PayloadAction<{}>) {
       state.loading = false;
@@ -29,7 +29,7 @@ const messageSlice = createSlice({
     storeMessageSuccess(state, action: PayloadAction<{}>) {
       state.loading = false;
       state.error = null;
-      state.storeSubject = action.payload;
+      state.storeMessage = action.payload;
     },
     storeMessageFail(state, action: PayloadAction<{}>) {
       state.loading = false;

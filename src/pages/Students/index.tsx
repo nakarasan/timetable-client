@@ -34,8 +34,6 @@ export const Students = () => {
     fetchSubjects();
   }, []);
 
-
-
   return (
     <div>
       <div className='flex justify-end pb-4'>
@@ -57,6 +55,7 @@ export const Students = () => {
                   'Mobile',
                   'RegisterNumber',
                   'Address',
+                  'Department',
                   'Actions',
                 ].map((heading) => (
                   <th
@@ -69,7 +68,7 @@ export const Students = () => {
               </tr>
             </thead>
             <tbody className='bg-white divide-y divide-gray-200'>
-              {students && students.length > 0 ? (
+              {students && students?.length > 0 ? (
                 students?.map((item: any, index: any) => (
                   <tr key={index}>
                     <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
@@ -86,6 +85,9 @@ export const Students = () => {
                     </td>
                     <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
                       {item?.address}
+                    </td>
+                    <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
+                      {item?.batchName}
                     </td>
                     <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500 w-[10vw]'>
                       <Trash2

@@ -45,10 +45,6 @@ export const StudentDashboard = () => {
     dispatch(loadTimetableByBatchRequested(user?.details?.batchId));
   }, [dispatch, user]);
 
-  console.log('auth', auth);
-  console.log('user', user);
-  console.log('batchTimeTable', batchTimeTable);
-
   // Group entries by day
   const groupedByDay: Record<string, TimetableEntry[]> = {};
   daysOfWeek.forEach((day) => {

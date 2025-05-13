@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'store';
 import { storeClassSubjectRequested } from 'store/class-subject/class-subject-Slice';
 import { loadBatchRequested } from 'store/department/classSlice';
+import { storeMessageRequested } from 'store/message/messageSlice';
 
 export const MessageForm = () => {
   const dispatch = useDispatch();
@@ -43,11 +44,8 @@ export const MessageForm = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    dispatch(storeClassSubjectRequested(formData));
+    dispatch(storeMessageRequested(formData));
   };
-
-  console.log('fffffff', formData);
-  console.log('auth', auth);
 
   return (
     <div className='bg-white p-8 rounded-xl shadow-md md:min-w-[40vw]'>

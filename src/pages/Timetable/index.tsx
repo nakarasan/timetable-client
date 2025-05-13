@@ -90,7 +90,6 @@ export const TimeTable: React.FC = () => {
   }, [dispatch, formData?.batchId]);
 
   const { auth } = useSelector((state: RootState) => state.auth);
-  console.log('auth', auth);
   return (
     <div>
       <div className='flex justify-end items-end gap-4 pb-2'>

@@ -43,20 +43,19 @@ const Sidebar = () => {
       icon: FolderIcon,
       children: [
         {
+          name: 'Subjects',
+          icon: BuildingLibraryIcon,
+          path: '/master-data/subjects',
+        },
+        {
           name: 'Departments',
           icon: AcademicCapIcon,
           path: '/master-data/departments',
         },
         { name: 'Batches', icon: UsersIcon, path: '/master-data/batches' },
-        {
-          name: 'Subjects',
-          icon: BuildingLibraryIcon,
-          path: '/master-data/subjects',
-        },
       ],
     },
-    { name: 'Users', icon: UsersIcon, path: '/users' },
-    { name: 'Message', icon: BellIcon, path: '/message' },
+    { name: 'Admins', icon: UsersIcon, path: '/users' },
     { name: 'Help', icon: QuestionMarkCircleIcon, path: '/help' },
   ];
 

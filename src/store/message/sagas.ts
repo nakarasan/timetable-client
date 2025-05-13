@@ -15,7 +15,11 @@ export function* loadMessageByBatchEffect(action: {
   payload: any;
 }): Generator<any, void, any> {
   try {
-    const { data } = yield call(axiosInstance.get, `${apiURL}/Subject`);
+    debugger;
+    const { data } = yield call(
+      axiosInstance.get,
+      `${apiURL}/Message/batch/${action?.payload}`
+    );
     yield put(loadMessageByBatchSuccess(data));
   } catch (error: any) {
     yield put(loadMessageByBatchFail(error.message));
@@ -29,7 +33,7 @@ export function* storeMessageEffect(action: {
   try {
     const { data } = yield call(
       axiosInstance.post,
-      `${apiURL}/SubjectHour`,
+      `${apiURL}/Message`,
       action.payload
     );
     yield put(storeMessageSuccess(data));

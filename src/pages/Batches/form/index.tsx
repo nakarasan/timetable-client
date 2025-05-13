@@ -36,7 +36,7 @@ export const BatchForm = () => {
   };
 
   useEffect(() => {
-    if (classes.length > 0 && formData.classId === 0) {
+    if (classes?.length > 0 && formData.classId === 0) {
       setFormData((prev) => ({
         ...prev,
         classId: classes[0].id,

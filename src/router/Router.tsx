@@ -26,7 +26,6 @@ import StudentProfile from 'pages/StudentProfile';
 
 const Router = () => {
   const { auth } = useSelector((state: RootState) => state.auth);
-  console.log('auth', auth);
 
   const AdminRoute: React.FC<{ children: React.ReactNode }> = ({
     children,
@@ -89,7 +88,6 @@ const Router = () => {
         />
 
         <Route
-          path='/students'
           element={
             <StudentRoute>
               <StudentLayout />
@@ -111,7 +109,6 @@ const Router = () => {
         </Route>
 
         <Route
-          path='/staffs'
           element={
             <StaffRoute>
               <StaffLayout />

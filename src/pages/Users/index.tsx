@@ -15,7 +15,7 @@ export const Users = () => {
   const [createOpen, setCreateOpen] = useState(false);
   const dispatch = useDispatch();
   const { auth } = useSelector((state: RootState) => state.auth);
-  const {  admins } = useSelector((state: RootState) => state.user);
+  const { admins } = useSelector((state: RootState) => state.user);
 
   useEffect(() => {
     const fetchSubjects = async () => {
@@ -25,8 +25,6 @@ export const Users = () => {
 
     fetchSubjects();
   }, [auth]);
-
-
 
   return (
     <div>
@@ -56,7 +54,7 @@ export const Users = () => {
               </tr>
             </thead>
             <tbody className='bg-white divide-y divide-gray-200'>
-              {admins && admins.length > 0 ? (
+              {admins && admins?.length > 0 ? (
                 admins?.map((item: any, index: any) => (
                   <tr key={index}>
                     <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>
